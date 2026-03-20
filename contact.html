@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Three Squirrels Overseas</title>
+  <meta name="description" content="Contact Three Squirrels overseas sales team. Email, WhatsApp, phone. We respond within 24 hours.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="images/logo-original.png">
+  <script src="js/inquiry.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="images/logo-original.png" alt="Three Squirrels" class="logo-img"></a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="inquiry.html" class="cart-btn" title="My Inquiry">
+          <i data-lucide="shopping-cart"></i>
+          <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+        </a>
+        <a href="products.html" class="btn btn-primary btn-sm">Start Sourcing</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>Contact Our Sales Team</h1>
+      <p>We respond to all inquiries within 24 hours. For urgent matters, please use WhatsApp.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:900px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+
+        <!-- CONTACT INFO -->
+        <div>
+          <h2 style="font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:700;color:#2D3436;margin-bottom:24px;">Get in Touch</h2>
+
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <div style="width:44px;height:44px;background:#FFF3E0;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="mail" style="width:20px;height:20px;color:#FF6B35;"></i>
+              </div>
+              <div>
+                <div style="font-weight:600;font-size:0.9rem;color:#2D3436;margin-bottom:2px;">Email</div>
+                <a href="mailto:overseas@three-squirrels.com" style="color:#636E72;font-size:0.88rem;">overseas@three-squirrels.com</a>
+                <div style="color:#B2BEC3;font-size:0.75rem;margin-top:2px;">We respond within 24 hours</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <div style="width:44px;height:44px;background:#FFF3E0;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="message-circle" style="width:20px;height:20px;color:#FF6B35;"></i>
+              </div>
+              <div>
+                <div style="font-weight:600;font-size:0.9rem;color:#2D3436;margin-bottom:2px;">WhatsApp</div>
+                <a href="https://wa.me/" target="_blank" style="color:#636E72;font-size:0.88rem;">+86 400-888-8888</a>
+                <div style="color:#B2BEC3;font-size:0.75rem;margin-top:2px;">Fastest response</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <div style="width:44px;height:44px;background:#FFF3E0;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="phone" style="width:20px;height:20px;color:#FF6B35;"></i>
+              </div>
+              <div>
+                <div style="font-weight:600;font-size:0.9rem;color:#2D3436;margin-bottom:2px;">Phone</div>
+                <a href="tel:+864008888888" style="color:#636E72;font-size:0.88rem;">+86 400-888-8888</a>
+                <div style="color:#B2BEC3;font-size:0.75rem;margin-top:2px;">Mon-Fri 9AM-6PM CST</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:16px;align-items:flex-start;">
+              <div style="width:44px;height:44px;background:#FFF3E0;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i data-lucide="map-pin" style="width:20px;height:20px;color:#FF6B35;"></i>
+              </div>
+              <div>
+                <div style="font-weight:600;font-size:0.9rem;color:#2D3436;margin-bottom:2px;">Address</div>
+                <div style="color:#636E72;font-size:0.88rem;">Three Squirrels Headquarters<br>No. 2888 Chengbei Avenue, Hefei<br>Anhui Province, China 230000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div>
+          <h2 style="font-family:'Poppins',sans-serif;font-size:1.4rem;font-weight:700;color:#2D3436;margin-bottom:24px;">Send Us a Message</h2>
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:flex;flex-direction:column;gap:16px;">
+            <input type="hidden" name="form-name" value="contact">
+            <p style="display:none;"><label>Don't fill this: <input name="bot-field"></label></p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+              <div style="display:flex;flex-direction:column;gap:5px;">
+                <label style="font-size:0.82rem;font-weight:600;color:#2D3436;">Company Name <span style="color:#E74C3C;">*</span></label>
+                <input type="text" name="company" required placeholder="ABC Trading Co." style="padding:10px 14px;border:1.5px solid #DFE6E9;border-radius:8px;font-size:0.88rem;outline:none;">
+              </div>
+              <div style="display:flex;flex-direction:column;gap:5px;">
+                <label style="font-size:0.82rem;font-weight:600;color:#2D3436;">Contact Person <span style="color:#E74C3C;">*</span></label>
+                <input type="text" name="name" required placeholder="John Smith" style="padding:10px 14px;border:1.5px solid #DFE6E9;border-radius:8px;font-size:0.88rem;outline:none;">
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <label style="font-size:0.82rem;font-weight:600;color:#2D3436;">Email <span style="color:#E74C3C;">*</span></label>
+              <input type="email" name="email" required placeholder="john@abctrading.com" style="padding:10px 14px;border:1.5px solid #DFE6E9;border-radius:8px;font-size:0.88rem;outline:none;">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <label style="font-size:0.82rem;font-weight:600;color:#2D3436;">Phone / WhatsApp</label>
+              <input type="tel" name="phone" placeholder="+1 234 567 8900" style="padding:10px 14px;border:1.5px solid #DFE6E9;border-radius:8px;font-size:0.88rem;outline:none;">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <label style="font-size:0.82rem;font-weight:600;color:#2D3436;">Your Message <span style="color:#E74C3C;">*</span></label>
+              <textarea name="message" required rows="4" placeholder="Tell us about your business, target markets, and what products you're interested in..." style="padding:10px 14px;border:1.5px solid #DFE6E9;border-radius:8px;font-size:0.88rem;outline:none;resize:vertical;font-family:inherit;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-orange btn-lg" style="width:100%;">
+              <i data-lucide="send" style="width:16px;height:16px;"></i>
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:none;padding:0;text-align:center;">
+        <p>© 2026 Three Squirrels Overseas. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script>document.addEventListener('DOMContentLoaded',()=>{lucide.createIcons();updateCartBadge();});</script>
+</body>
+</html>
