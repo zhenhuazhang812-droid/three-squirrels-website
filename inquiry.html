@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Inquiry List | Three Squirrels Overseas</title>
+  <meta name="description" content="Review your selected products and submit your inquiry to Three Squirrels overseas sales team.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/inquiry.css">
+  <link rel="icon" type="image/png" href="images/logo-original.png">
+  <script src="js/inquiry.js"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo-original.png" alt="Three Squirrels" class="logo-img">
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="inquiry.html" class="cart-btn active">
+          <i data-lucide="shopping-cart"></i>
+          <span class="cart-badge" id="headerBadge" style="display:none;">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="inquiry-page">
+    <div class="container">
+
+      <!-- EMPTY STATE -->
+      <div id="emptyState" class="empty-state" style="display:none;">
+        <div class="empty-icon"><i data-lucide="package-x" style="width:64px;height:64px;color:#DFE6E9;"></i></div>
+        <h2>Your inquiry list is empty</h2>
+        <p>Browse our product catalog and add products you're interested in.</p>
+        <a href="products.html" class="btn btn-orange btn-lg">
+          <i data-lucide="grid-3x3" style="width:16px;height:16px;"></i>
+          Browse Products
+        </a>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div id="mainContent">
+
+        <!-- PAGE HEADER -->
+        <div class="inquiry-page-header">
+          <div>
+            <h1 class="page-title">
+              <i data-lucide="clipboard-list" style="width:26px;height:26px;color:#FF6B35;"></i>
+              My Inquiry List
+            </h1>
+            <p class="page-subtitle">Review your selected products and submit your inquiry to our sales team.</p>
+          </div>
+          <div class="header-btns">
+            <button class="btn btn-outline" onclick="clearAllInquiry(); renderInquiryPage();">
+              <i data-lucide="trash-2" style="width:14px;height:14px;"></i> Clear All
+            </button>
+          </div>
+        </div>
+
+        <div class="inquiry-layout">
+
+          <!-- LEFT: PRODUCTS TABLE + FORM -->
+          <div class="inquiry-main">
+
+            <!-- PRODUCTS TABLE -->
+            <div class="card">
+              <div class="card-header">
+                <h3><i data-lucide="package" style="width:18px;height:18px;color:#FF6B35;"></i> Selected Products <span class="count-badge" id="countBadge">0</span></h3>
+              </div>
+              <div class="table-wrap">
+                <table class="inquiry-table" id="inquiryTable">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Product</th>
+                      <th>Category</th>
+                      <th>MOQ</th>
+                      <th>Price Range</th>
+                      <th>Qty</th>
+                      <th>Est. Amount</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="inquiryTableBody"></tbody>
+                </table>
+              </div>
+              <div class="total-row" id="totalRow">
+                <span>Estimated Total:</span>
+                <span class="total-value" id="totalValue">$0.00</span>
+                <span class="total-note">* Final price confirmed by sales team</span>
+              </div>
+            </div>
+
+            <!-- CUSTOMER FORM -->
+            <div class="card">
+              <div class="card-header">
+                <h3><i data-lucide="user" style="width:18px;height:18px;color:#FF6B35;"></i> Your Information</h3>
+                <p>Our sales team will contact you within 24 hours.</p>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="fCompany">Company Name <span class="required">*</span></label>
+                  <input type="text" id="fCompany" class="form-control" placeholder="ABC Trading Co., Ltd." required>
+                </div>
+                <div class="form-group">
+                  <label for="fName">Contact Person <span class="required">*</span></label>
+                  <input type="text" id="fName" class="form-control" placeholder="John Smith" required>
+                </div>
+                <div class="form-group">
+                  <label for="fEmail">Email Address <span class="required">*</span></label>
+                  <input type="email" id="fEmail" class="form-control" placeholder="john@abctrading.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="fPhone">Phone / WhatsApp <span class="required">*</span></label>
+                  <input type="tel" id="fPhone" class="form-control" placeholder="+1 234 567 8900" required>
+                </div>
+                <div class="form-group form-full">
+                  <label for="fMessage">Additional Requirements</label>
+                  <textarea id="fMessage" class="form-control" rows="3" placeholder="Target price, delivery destination, shipping terms, special requirements..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUBMIT METHODS -->
+            <div class="card submit-card">
+              <h3 class="submit-title"><i data-lucide="send" style="width:18px;height:18px;color:#FF6B35;"></i> How would you like to submit your inquiry?</h3>
+              <div class="submit-btns">
+                <button class="submit-btn image-btn" onclick="downloadInquiryImage()">
+                  <div class="submit-btn-icon"><i data-lucide="image" style="width:24px;height:24px;color:#07BC0C;"></i></div>
+                  <div>
+                    <strong>Download as Image</strong>
+                    <small>Save & share via WeChat</small>
+                  </div>
+                </button>
+                <button class="submit-btn whatsapp-btn" onclick="sendViaWhatsApp()">
+                  <div class="submit-btn-icon"><i data-lucide="message-circle" style="width:24px;height:24px;color:#25D366;"></i></div>
+                  <div>
+                    <strong>Send via WhatsApp</strong>
+                    <small>Quick response</small>
+                  </div>
+                </button>
+                <button class="submit-btn email-btn" onclick="sendViaEmail()">
+                  <div class="submit-btn-icon"><i data-lucide="mail" style="width:24px;height:24px;color:#3498DB;"></i></div>
+                  <div>
+                    <strong>Send via Email</strong>
+                    <small>Email our team</small>
+                  </div>
+                </button>
+                <button class="submit-btn csv-btn" onclick="downloadCSV()">
+                  <div class="submit-btn-icon"><i data-lucide="download" style="width:24px;height:24px;color:#636E72;"></i></div>
+                  <div>
+                    <strong>Download CSV</strong>
+                    <small>Save for later</small>
+                  </div>
+                </button>
+              </div>
+              <div class="submit-note">
+                <i data-lucide="shield-check" style="width:14px;height:14px;color:#00B894;flex-shrink:0;"></i>
+                <span>Your information is secure. We use it only to respond to your inquiry.</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: SIDEBAR -->
+          <div class="inquiry-sidebar">
+
+            <div class="sidebar-card">
+              <h4><i data-lucide="lightbulb" style="width:16px;height:16px;color:#FF6B35;"></i> How It Works</h4>
+              <ol class="tips-list">
+                <li>Browse & select products</li>
+                <li>Add them to your inquiry list</li>
+                <li>Fill in your company info</li>
+                <li>Download as image & send via WeChat to our sales team</li>
+                <li>We respond within 24 hours</li>
+              </ol>
+            </div>
+
+            <div class="sidebar-card">
+              <h4><i data-lucide="headphones" style="width:16px;height:16px;color:#FF6B35;"></i> Need Help?</h4>
+              <p style="font-size:0.85rem;color:#636E72;margin:0 0 12px;line-height:1.6;">Our sales team is ready to assist with your inquiry.</p>
+              <div class="contact-list">
+                <a href="mailto:overseas@three-squirrels.com" class="contact-item">
+                  <i data-lucide="mail" style="width:16px;height:16px;"></i>
+                  overseas@three-squirrels.com
+                </a>
+                <a href="https://wa.me/" target="_blank" class="contact-item">
+                  <i data-lucide="message-circle" style="width:16px;height:16px;"></i>
+                  WhatsApp Available
+                </a>
+              </div>
+            </div>
+
+            <div class="sidebar-card">
+              <h4><i data-lucide="grid-3x3" style="width:16px;height:16px;color:#FF6B35;"></i> Categories</h4>
+              <div class="cat-chips">
+                <a href="products.html?cat=nuts" class="cat-chip">Nuts & Seeds</a>
+                <a href="products.html?cat=dried-fruits" class="cat-chip">Dried Fruits</a>
+                <a href="products.html?cat=sea-snacks" class="cat-chip">Sea Snacks</a>
+                <a href="products.html?cat=sweets" class="cat-chip">Traditional Sweets</a>
+                <a href="products.html?cat=gift-sets" class="cat-chip">Gift Sets</a>
+              </div>
+              <a href="products.html" class="btn btn-orange" style="width:100%;margin-top:12px;text-align:center;">
+                View All Products
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS STATE (hidden by default) -->
+  <div id="successState" class="success-page" style="display:none;">
+    <div class="success-card">
+      <div class="success-icon"><i data-lucide="check-circle" style="width:80px;height:80px;color:#00B894;"></i></div>
+      <h2>Inquiry Submitted!</h2>
+      <p>Thank you for your inquiry. Our sales team will review your request and contact you within <strong>24 hours</strong>.</p>
+      <div class="success-actions">
+        <a href="products.html" class="btn btn-orange">Continue Browsing</a>
+        <a href="index.html" class="btn btn-outline">Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIDDEN IMAGE CANVAS (for download) -->
+  <div id="imageCaptureArea" style="position:fixed;left:-9999px;top:-9999px;width:800px;background:#fff;font-family:Inter,sans-serif;"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="pageFooter">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="images/logo-original.png" alt="Three Squirrels" class="footer-logo">
+          <p>China's leading snack food exporter.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact</h4>
+          <p><i data-lucide="mail" style="width:14px;height:14px;"></i> overseas@three-squirrels.com</p>
+          <p><i data-lucide="phone" style="width:14px;height:14px;"></i> +86 400-888-8888</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Three Squirrels Overseas. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderInquiryPage();
+    });
+
+    function renderInquiryPage() {
+      const list = getInquiryList();
+      const emptyEl = document.getElementById('emptyState');
+      const mainEl = document.getElementById('mainContent');
+      const successEl = document.getElementById('successState');
+      const footer = document.getElementById('pageFooter');
+      const tbody = document.getElementById('inquiryTableBody');
+      const countBadge = document.getElementById('countBadge');
+      const totalValue = document.getElementById('totalValue');
+      const headerBadge = document.getElementById('headerBadge');
+
+      // Hide success, show main
+      successEl.style.display = 'none';
+      footer.style.display = '';
+
+      if (list.length === 0) {
+        emptyEl.style.display = 'flex';
+        mainEl.style.display = 'none';
+        return;
+      }
+
+      emptyEl.style.display = 'none';
+      mainEl.style.display = '';
+
+      countBadge.textContent = list.length;
+
+      tbody.innerHTML = list.map((p, i) => `
+        <tr class="inquiry-row">
+          <td class="row-num">${i + 1}</td>
+          <td class="row-product">
+            <img src="${p.image}" alt="${p.name}" class="row-img"
+                 onerror="this.src='https://images.unsplash.com/photo-1606923829579-0cb981a83e2e?w=60&h=60&fit=crop'">
+            <div>
+              <div class="row-name">${p.name}</div>
+              ${p.tags && p.tags.length ? `<div style="font-size:0.7rem;color:#E67E22;margin-top:2px;">${p.tags.join(' · ')}</div>` : ''}
+            </div>
+          </td>
+          <td><span class="row-cat">${p.category}</span></td>
+          <td class="row-moq">${p.moq} ${p.unit}</td>
+          <td class="row-price">$${(p.priceMin||0).toFixed(2)} – $${(p.priceMax||0).toFixed(2)}</td>
+          <td class="row-qty">
+            <div class="qty-group">
+              <button class="qty-btn" onclick="adjustQty(${i}, -100)">−</button>
+              <input type="number" value="${p.qty}" min="${p.moq||1}" step="${p.moq||1}"
+                     onchange="setQty(${i}, this.value)" class="qty-input">
+              <button class="qty-btn" onclick="adjustQty(${i}, 100)">+</button>
+            </div>
+          </td>
+          <td class="row-subtotal">$${((p.priceMin||0) * p.qty).toFixed(2)}</td>
+          <td>
+            <button class="remove-btn" onclick="removeRow(${i})" title="Remove">
+              <i data-lucide="trash-2" style="width:15px;height:15px;"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      lucide.createIcons();
+
+      const total = list.reduce((s, p) => s + (p.priceMin||0) * p.qty, 0);
+      totalValue.textContent = `$${total.toFixed(2)}`;
+
+      // Update badges
+      const badge = document.getElementById('headerBadge');
+      if (list.length > 0) {
+        badge.textContent = list.length;
+        badge.style.display = 'flex';
+      } else {
+        badge.style.display = 'none';
+      }
+
+      updateCartBadge();
+    }
+
+    function adjustQty(index, delta) {
+      const list = getInquiryList();
+      const item = list[index];
+      if (!item) return;
+      const newQty = Math.max(item.moq || 1, item.qty + delta);
+      list[index].qty = newQty;
+      saveInquiryList(list);
+      renderInquiryPage();
+    }
+
+    function setQty(index, value) {
+      const list = getInquiryList();
+      const item = list[index];
+      if (!item) return;
+      list[index].qty = Math.max(item.moq || 1, parseInt(value) || item.moq || 1);
+      saveInquiryList(list);
+      renderInquiryPage();
+    }
+
+    function removeRow(index) {
+      const list = getInquiryList();
+      if (list[index]) {
+        removeFromInquiry(list[index].id);
+        renderInquiryPage();
+      }
+    }
+
+    function clearAllInquiry() {
+      if (confirm('Remove all products from your inquiry list?')) {
+        clearInquiry();
+        renderInquiryPage();
+      }
+    }
+
+    // WhatsApp
+    function sendViaWhatsApp() {
+      if (getInquiryList().length === 0) { alert('Please add at least one product first.'); return; }
+      const text = generateInquiryText();
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    // Email
+    function sendViaEmail() {
+      if (getInquiryList().length === 0) { alert('Please add at least one product first.'); return; }
+      const subject = encodeURIComponent('Product Inquiry from Three Squirrels Website');
+      const body = encodeURIComponent(generateInquiryText());
+      window.location.href = `mailto:overseas@three-squirrels.com?subject=${subject}&body=${body}`;
+    }
+
+    // CSV
+    function downloadCSV() {
+      const list = getInquiryList();
+      if (list.length === 0) { alert('Please add at least one product first.'); return; }
+      const headers = ['#','Product Name','Category','MOQ','Unit','Qty Required','Price Min (USD)','Price Max (USD)','Est. Subtotal (USD)'];
+      const rows = list.map((p,i) => [i+1,`"${p.name}"`,`"${p.category}"`,p.moq,p.unit||'units',p.qty,(p.priceMin||0).toFixed(2),(p.priceMax||0).toFixed(2),((p.priceMin||0)*p.qty).toFixed(2)]);
+      const BOM = '\uFEFF';
+      const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+      const blob = new Blob([BOM + csv], {type:'text/csv;charset=utf-8;'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `ThreeSquirrels-Inquiry-${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    // Generate inquiry text
+    function generateInquiryText() {
+      const list = getInquiryList();
+      const total = list.reduce((s,p) => s+(p.priceMin||0)*p.qty, 0);
+      const fCompany = document.getElementById('fCompany')?.value || '';
+      const fName = document.getElementById('fName')?.value || '';
+      const fEmail = document.getElementById('fEmail')?.value || '';
+      const fPhone = document.getElementById('fPhone')?.value || '';
+      const fMessage = document.getElementById('fMessage')?.value || '';
+      let text = `🐿️ THREE SQUIRRELS OVERSEAS - PRODUCT INQUIRY\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📅 Date: ${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}\n\n📋 PRODUCT LIST:\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
+      list.forEach((p,i) => {
+        text += `${i+1}. ${p.name}\n   Category: ${p.category} | MOQ: ${p.moq} ${p.unit||'units'}\n   Qty: ${p.qty} ${p.unit||'units'} | Price: $${(p.priceMin||0).toFixed(2)}–$${(p.priceMax||0).toFixed(2)}/unit\n   Est: $${((p.priceMin||0)*p.qty).toFixed(2)}\n\n`;
+      });
+      text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📊 TOTAL: ${list.length} products | Est. ~$${total.toFixed(2)}\n\n`;
+      if (fCompany || fName || fEmail || fPhone) {
+        text += `🏢 COMPANY INFO:\n`;
+        if (fCompany) text += `Company: ${fCompany}\n`;
+        if (fName) text += `Contact: ${fName}\n`;
+        if (fEmail) text += `Email: ${fEmail}\n`;
+        if (fPhone) text += `Phone: ${fPhone}\n`;
+        if (fMessage) text += `Message: ${fMessage}\n`;
+        text += `\n`;
+      }
+      text += `📞 Contact: overseas@three-squirrels.com | +86 400-888-8888\n🌐 www.three-squirrels.com`;
+      return text;
+    }
+
+    // Download as Image
+    function downloadInquiryImage() {
+      const list = getInquiryList();
+      if (list.length === 0) { alert('Please add at least one product first.'); return; }
+
+      const fCompany = document.getElementById('fCompany')?.value || '';
+      const fName = document.getElementById('fName')?.value || '';
+      const fEmail = document.getElementById('fEmail')?.value || '';
+      const fPhone = document.getElementById('fPhone')?.value || '';
+      const fMessage = document.getElementById('fMessage')?.value || '';
+      const total = list.reduce((s,p) => s+(p.priceMin||0)*p.qty, 0);
+
+      const container = document.getElementById('imageCaptureArea');
+      container.innerHTML = `
+        <div style="padding:48px 52px;background:#fff;">
+          <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #FF6B35;padding-bottom:24px;margin-bottom:32px;">
+            <div>
+              <div style="font-size:11px;color:#FF6B35;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">🐿️ Three Squirrels Overseas</div>
+              <div style="font-size:26px;font-weight:700;color:#2D3436;">Product Inquiry List</div>
+              <div style="font-size:13px;color:#636E72;margin-top:4px;">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-size:11px;color:#636E72;text-transform:uppercase;letter-spacing:1px;">Est. Total</div>
+              <div style="font-size:32px;font-weight:700;color:#FF6B35;">$${total.toFixed(2)}</div>
+              <div style="font-size:12px;color:#B2BEC3;">${list.length} product${list.length>1?'s':''}</div>
+            </div>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:24px;">
+            <thead>
+              <tr style="background:#FAFBFC;border-bottom:2px solid #DFE6E9;">
+                <th style="padding:10px 8px;text-align:left;font-size:10px;font-weight:700;color:#636E72;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;">#</th>
+                <th style="padding:10px 8px;text-align:left;font-size:10px;font-weight:700;color:#636E72;text-transform:uppercase;letter-spacing:1px;">Product</th>
+                <th style="padding:10px 8px;text-align:left;font-size:10px;font-weight:700;color:#636E72;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;">Category</th>
+                <th style="padding:10px 8px;text-align:left;font-size:10px;font-weight:700;color:#636E72;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;">MOQ</th>
+                <th style="padding:10px 8px;text-align:left;font-size:10px;font-weight:700;color:#636E72;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;">Qty</th>
+                <th style="padding:10px 8px;text-align:right;font-size:10px;font-weight:700;color:#636E72;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;">Est. Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${list.map((p,i) => `
+                <tr style="border-bottom:1px solid #F0F3F5;">
+                  <td style="padding:12px 8px;color:#B2BEC3;font-weight:600;font-size:13px;">${i+1}</td>
+                  <td style="padding:12px 8px;">
+                    <div style="font-weight:600;font-size:13px;color:#2D3436;">${p.name}</div>
+                    ${p.tags&&p.tags.length?`<div style="font-size:11px;color:#E67E22;margin-top:2px;">${p.tags.join(' · ')}</div>`:''}
+                  </td>
+                  <td style="padding:12px 8px;font-size:12px;color:#636E72;">${p.category}</td>
+                  <td style="padding:12px 8px;font-size:12px;color:#636E72;white-space:nowrap;">${p.moq} ${p.unit||'units'}</td>
+                  <td style="padding:12px 8px;font-size:12px;color:#636E72;white-space:nowrap;">${p.qty} ${p.unit||'units'}</td>
+                  <td style="padding:12px 8px;font-size:14px;font-weight:700;color:#FF6B35;text-align:right;">$${((p.priceMin||0)*p.qty).toFixed(2)}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+          ${(fCompany||fName||fEmail||fPhone)?`
+          <div style="border-top:2px solid #FF6B35;padding-top:20px;margin-bottom:20px;">
+            <div style="font-size:11px;font-weight:700;color:#636E72;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Buyer Information</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;">
+              ${fCompany?`<div><span style="color:#636E72;">Company:</span> <strong style="color:#2D3436;">${fCompany}</strong></div>`:''}
+              ${fName?`<div><span style="color:#636E72;">Contact:</span> <strong style="color:#2D3436;">${fName}</strong></div>`:''}
+              ${fEmail?`<div><span style="color:#636E72;">Email:</span> <strong style="color:#2D3436;">${fEmail}</strong></div>`:''}
+              ${fPhone?`<div><span style="color:#636E72;">Phone:</span> <strong style="color:#2D3436;">${fPhone}</strong></div>`:''}
+            </div>
+            ${fMessage?`<div style="margin-top:8px;font-size:12px;color:#636E72;"><strong>Note:</strong> ${fMessage}</div>`:''}
+          </div>`:''}
+          <div style="text-align:center;padding-top:16px;border-top:1px solid #F0F3F5;font-size:12px;color:#B2BEC3;">
+            🌐 www.three-squirrels.com | ✉ overseas@three-squirrels.com | 📞 +86 400-888-8888
+          </div>
+        </div>
+      `;
+
+      const btn = document.querySelector('.image-btn');
+      const origHTML = btn.innerHTML;
+      btn.innerHTML = '<i data-lucide="loader" style="width:20px;height:20px;animation:spin 1s linear infinite;"></i> Generating...';
+      btn.disabled = true;
+      lucide.createIcons();
+
+      html2canvas(container, {
+        scale: 2,
+        backgroundColor: '#ffffff',
+        useCORS: true,
+        logging: false,
+        allowTaint: true
+      }).then(canvas => {
+        container.style.position = 'fixed';
+        container.style.left = '-9999px';
+        const link = document.createElement('a');
+        link.download = `ThreeSquirrels-Inquiry-${new Date().toISOString().slice(0,10)}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        btn.innerHTML = origHTML;
+        btn.disabled = false;
+        lucide.createIcons();
+        document.body.style.overflow = '';
+      }).catch(err => {
+        alert('Failed to generate image. Please try again.');
+        btn.innerHTML = origHTML;
+        btn.disabled = false;
+        lucide.createIcons();
+      });
+    }
+  </script>
+</body>
+</html>
